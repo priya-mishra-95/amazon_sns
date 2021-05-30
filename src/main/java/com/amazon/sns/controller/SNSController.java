@@ -16,12 +16,11 @@ public class SNSController {
     static ObjectMapper objectMapper = new ObjectMapper();
 
     @RequestMapping(path = "/notification", method = {RequestMethod.GET, RequestMethod.POST})
-    public String index(@RequestBody(required = false) String snsRequest, HttpServletRequest httpServletRequest,
+    public void index(@RequestBody(required = false) String snsRequest, HttpServletRequest httpServletRequest,
                       HttpServletResponse httpServletResponse) {
         System.out.println("SNS Request String : " + snsRequest);
         JSONObject jsonObject = new JSONObject(snsRequest);
         String subscribeURL = jsonObject.optString("SubscribeURL");
         System.out.println("Subscription Confirmation URL: "+subscribeURL);
-        return subscribeURL;
     }
 }
