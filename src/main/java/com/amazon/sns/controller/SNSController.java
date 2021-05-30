@@ -19,10 +19,11 @@ public class SNSController {
     public void index(@RequestBody(required = false) String snsRequest, HttpServletRequest httpServletRequest,
                       HttpServletResponse httpServletResponse) {
         System.out.println("SNS Request String : " + snsRequest);
-        JSONObject jsonObject = new JSONObject(snsRequest);
-        if(!jsonObject.optString("Type").isEmpty() && jsonObject.optString("Type").equals("SubscriptionConfirmation"))
-            System.out.println("Subscription Confirmation URL: "+jsonObject.optString("SubscribeURL"));
-        else
-            System.out.println("Message published is ::"+ snsRequest);
+        if (snsRequest.contains("Type")) {
+            JSONObject jsonObject = new JSONObject(snsRequest);
+            if (!jsonObject.optString("Type").isEmpty() && jsonObject.optString("Type").equals("SubscriptionConfirmation"))
+                System.out.println("Subscription Confirmation URL: " + jsonObject.optString("SubscribeURL"));
+        } else
+            System.out.println("Message published is ::" + snsRequest);
     }
 }
