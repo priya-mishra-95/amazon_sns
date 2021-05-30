@@ -20,7 +20,9 @@ public class SNSController {
                       HttpServletResponse httpServletResponse) {
         System.out.println("SNS Request String : " + snsRequest);
         JSONObject jsonObject = new JSONObject(snsRequest);
-        String subscribeURL = jsonObject.optString("SubscribeURL");
-        System.out.println("Subscription Confirmation URL: "+subscribeURL);
+        if(!jsonObject.optString("Type").isEmpty() && jsonObject.optString("Type").equals("SubscriptionConfirmation"))
+            System.out.println("Subscription Confirmation URL: "+jsonObject.optString("SubscribeURL"));
+        else
+            System.out.println("Message published is ::"+ snsRequest);
     }
 }
