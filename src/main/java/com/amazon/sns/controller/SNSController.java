@@ -1,6 +1,7 @@
 package com.amazon.sns.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,5 +19,8 @@ public class SNSController {
     public void index(@RequestBody(required = false) String snsRequest, HttpServletRequest httpServletRequest,
                       HttpServletResponse httpServletResponse) {
         System.out.println("SNS Request String : " + snsRequest);
+        JSONObject jsonObject = new JSONObject(snsRequest);
+        String subscribeURL = jsonObject.optString("SubscribeURL");
+        System.out.println("Subscription Confirmation URL: "+subscribeURL);
     }
 }
