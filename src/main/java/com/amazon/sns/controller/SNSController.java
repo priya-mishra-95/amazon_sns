@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SNSController {
 
     static ObjectMapper objectMapper = new ObjectMapper();
+    String message;
 
     @RequestMapping(path = "/notification", method = {RequestMethod.GET, RequestMethod.POST})
     public void index(@RequestBody(required = false) String snsRequest, HttpServletRequest httpServletRequest,
@@ -23,7 +24,14 @@ public class SNSController {
             JSONObject jsonObject = new JSONObject(snsRequest);
             if (!jsonObject.optString("Type").isEmpty() && jsonObject.optString("Type").equals("SubscriptionConfirmation"))
                 System.out.println("Subscription Confirmation URL: " + jsonObject.optString("SubscribeURL"));
-        } else
+        } else {
             System.out.println("Message published is ::" + snsRequest);
+            message = snsRequest;
+        }
+    }
+
+    @RequestMapping(value = "/messages", method = RequestMethod.GET)
+    public String getMessagePage() {
+        return "notification.html";
     }
 }
