@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<body>
+  <h1>Notification Page</h1>
+  <div th:if="${subscribeURL != null}">
+    <a th:href="@{${subscribeURL}}">Click To Subscribe</a>
+  </div>
+</body>
+</html>
